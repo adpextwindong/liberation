@@ -177,6 +177,8 @@ mul :: (OrMatVec a, OrMatVec b, MulR a b ~ Expr c, b ~ Expr b0, a ~ Expr a0, ToG
 mul = op2 "*"
 ```
 
+!TODO show the type inference error when the constraints aren't included.
+
 For reference here is the impl for op2 and the other type machinery kludged around from [Expr.hs in Hylogen](https://github.com/adpextwindong/hylogen/blob/protofeature/matrix/hylogen/src/Hylogen/Expr.hs).
 
 ```haskell
