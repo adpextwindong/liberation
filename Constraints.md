@@ -1,15 +1,19 @@
 # Type Constraints
 
+This post is a work in progress showcase of some type level programming that I have been enjoying over the past five months since I've started writing Haskell seriously in February. Its geared towards my imperative programmer friends (who are hopefully seeking liberation) and prospective interviewers interested in my engineering values. I'm not a Haskell developer but I play one on TV if you haven't noticed by Woodwright's Shop theme by now.
+
+Now the topic of the day is type constraints, where they show up and why I enjoy them.
+
 ## TOC/NOTES
-Notes I want to hit
+--Notes I want to hit
 
 - Picking a top tier (Language)
-- [(Type) Hole-Driven Haskell](https://www.youtube.com/watch?v=52VsgyexS8Q)
+- Aside - [(Type) Hole-Driven Haskell](https://www.youtube.com/watch?v=52VsgyexS8Q)
 - Typeclasses
 - ConstraintKind
 - On type safety: the classic Phantom type expr example
 
-## Picking a top tier (language)
+## Picking a top tier (...a language rant)
 
 [![Sanford Kelly's timeless words](https://img.youtube.com/vi/sGh4ZU4H5Hk/0.jpg)](https://youtu.be/sGh4ZU4H5Hk?t=96)
 
@@ -18,10 +22,42 @@ Notes I want to hit
 
 I want the money to work for me. I'm tired of working for the money." - Sanford Kelly 2009.
 ```
+Its 2021. We're not programming on PDP-11s, 286s or even Pentium 4s anymore. Most developers are working on problems that can tolerate a garbage collector during runtime. If not, then Rust is a good language. (I'm not here to argue for Rust, I'm a different kind of Bible salesman) Alternatively use FFI into a systems language if possible. Plenty of good software rests on that kind of interop. If all of the above cannot apply then you're either SOL or you know what you're doing TM.
+
+Eitherway, a vast amount of programmers on this earth are subjected to the torture that is JavaScript/(C++ || Java)/Python. (I would include PHP but thats a different part of hell to discuss another time)
+
+Here are my gripes with them in ascending order of pain:
+
+Python is dynamically typed. Writing anything past a page will result in type drift eventually. Python is great for teaching algorithmns and FFI interop frontends but past that it can be a real liability when runtime type issues can eat up a lot of time.
+
+Java is the epitome of OOP cult programming practices and has clouded the minds of generations. Javonic is a legitimate adjective.
+
+C++ being a design by commitee kitchen sink language puts it in a hard spot. There is plenty of good reasons to use C++ if you know what you're doing and want C interop. There are also plenty of footguns in it. The language is so old and vast that finding consistent resources on it is a pitfall for beginner programmers.
+
+Java and C++ both have enough type system features to express things you'd like for average CRUD/Engine work but often force you through awkward language features. Like a square peg through a round hole. Try writing an algebraic datatype for an AST by hand in those languages.
+
+On a serious note my experience with C++/Java taught at college was shocking. Leading up to college I already had programming experience so I got to watch beginners sink or swim. They force feed you this idea of "polymorphism" and "overloading" without being precise about it. Then if those language features aren't enough for you they siege your mind endlessly with object orientated programming drills that abuse class inherientance everywhere.
+
+It wasn't until I tried Haskell that I learned the difference between Parametric Polymorphism and Ad-hoc Polymorphism.
+
+Lastly Javascript...
+
+Javascript is the lowest common denominator language in terms of tooling/implementors/library users and even libraries. The sad truth about the internet is that a dynamically typed language is needed in the browser. But that does not and should not lead people to believe it belongs on the backend. The virtual machine work done for Javascript is impressive. But Javascript imo largely serves employers wanting a RAID.
+
+**R**edundant **A**nd **I**nexpensive **D**eveloper **A**array.
+
+---------
+!TODO Memory semantics, Rust lifetimes and the CString library.
+
+You might be thinking "HEY THIS JACKASS JUST HATES DYNAMICALLY TYPED LANGUAGES".
+
+Why yes. I do.
+
+The only dynamically typed languages I appreciate are Lisp and Prolog. And to be fair those languages are aimming for homoiconicity which is worth respecting.
 
 !TODO
 
-## Hole Driven Haskell
+## Aside- Hole Driven Haskell
 
 A technique that a lot of introductory Haskell material fails to show is Hole Driven Haskell.
 
@@ -137,6 +173,8 @@ type SDLCanDraw m = (SDLRenderer m, MonadReader Config m)
 
 drawGrid :: SDLCanDraw m => Int -> GridTransform -> m ()
 ```
+
+!TODO
 
 ### Hylogen type level kludging example
 
