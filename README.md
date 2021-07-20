@@ -1,8 +1,10 @@
 # Liberation
 
+![res/haskellRightShop.png](res/haskellRightShop.png)
+
 ## SUSPECT 1
 
-![SUSPECT1.png](suspect1.png)
+![res/SUSPECT1.png](res/suspect1.png)
 
 From [app/Main.hs](app/Main.hs)
 
