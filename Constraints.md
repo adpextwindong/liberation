@@ -1,13 +1,100 @@
 # Type Constraints
 
+## TOC/NOTES
 Notes I want to hit
 
+- Picking a top tier (Language)
+- [(Type) Hole-Driven Haskell](https://www.youtube.com/watch?v=52VsgyexS8Q)
 - Typeclasses
 - ConstraintKind
+- On type safety: the classic Phantom type expr example
+
+## Picking a top tier (language)
+
+[![Sanford Kelly's timeless words](https://img.youtube.com/vi/sGh4ZU4H5Hk/0.jpg)](https://youtu.be/sGh4ZU4H5Hk?t=96)
+
+```
+"I'm tired of it. Fuck working, who wants to work?
+
+I want the money to work for me. I'm tired of working for the money."
+```
+
+!TODO
+
+## Hole Driven Haskell
+
+A technique that a lot of introductory Haskell material fails to show is Hole Driven Haskell.
+
+Here's a talk by Matthew Brecknell from 2013 on it:
+
+[![Matthew Brecknell - Hole-Driven Haskell](https://img.youtube.com/vi/52VsgyexS8Q/0.jpg)](https://www.youtube.com/watch?v=52VsgyexS8Q)
+
+The gist of it is that if you don't know what the compiler is expecting just ask by placing an underscore. This can be done at both the type level and value level.
+
+Type level example:
+
+```haskell
+foo :: a -> _ -> b
+foo a baz = baz a
+```
+
+```
+    * Found type wildcard `_' standing for `a -> b'
+      Where: `a', `b' are rigid type variables bound by
+               the inferred type of foo :: a -> (a -> b) -> b
+               at typehole.hs:3:1-18
+      To use the inferred type, enable PartialTypeSignatures
+    * In the type `a -> _ -> b'
+      In the type signature: foo :: a -> _ -> b
+  |
+3 | foo :: a -> _ -> b
+  |             ^
+``` 
+
+Alternatively if we had this code where we generally knew the signature but now how to use the arguments:
+
+```haskell
+foo :: a -> (a->b) -> b
+foo x baz = _ x
+```
+
+```
+    * Found hole: _ :: a -> b
+      Where: `a', `b' are rigid type variables bound by
+               the type signature for:
+                 foo :: forall a b. a -> (a -> b) -> b
+               at typehole.hs:3:1-23
+    * In the expression: _
+      In the expression: _ x
+      In an equation for `foo': foo x baz = _ x
+    * Relevant bindings include
+        baz :: a -> b
+          (bound at typehole.hs:4:7)
+        x :: a
+          (bound at typehole.hs:4:5)
+        foo :: a -> (a -> b) -> b
+          (bound at typehole.hs:4:1)
+      Valid hole fits include
+        baz :: a -> b
+          (bound at typehole.hs:4:7)
+  |
+4 | foo x baz = _ x
+  |             ^
+```
+
+It says a valid hole fits include baz!
+
+Now this isn't to say this approach solves all your problems. Thinking will be necessary to get the typechecker to guide you closer to a valid expression. This gives us a mechanism to refine our types and build up to an appropriate type signature.
+
+Another point to note is that you can define other functions with type holes and partially apply them in expression to "force" rigid type variables. !TODO
+
+Ultimately to add to the previous topic about picking a top tier, type inference in Haskell can do a lot of work for you. Leveraging that to build type safe expressions is key.
 
 ## Examples while I think about this bit.
 
 ### Constraining instance head so that type 'a' has a show instance.
+
+This example problem popped up in the FP discord today and is probably the first encounter people have with type constraints.
 
 ```haskell
 data Tree a = Leaf a | Node a
@@ -17,7 +104,7 @@ instance Show (Tree a) where
     show (Leaf x) = ""
 ```
 
-This example produces this error from ghc (8.8.4):
+When compiled it produces this error from ghc (8.8.4):
 
 ```
 treeshow.hs:5:21: error:
