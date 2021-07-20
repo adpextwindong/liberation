@@ -54,6 +54,18 @@ drawGrid :: SDLCanDraw m => Int -> GridTransform -> m ()
 ### Hylogen type level kludging example
 
 ```haskell
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE ConstraintKinds #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
+--For OrMatVec MulR type-level machinery
+{-# LANGUAGE TypeFamilies #-}
+
 type family OrMatVec' a where
     OrMatVec' (Expr (FloatMat n m)) = 'True
     OrMatVec' (Expr (FloatVec n)) = 'True
@@ -81,6 +93,20 @@ mul = op2 "*"
 For reference here is the impl for op2 and the other type machinery kludged around from [Expr.hs in Hylogen](https://github.com/adpextwindong/hylogen/blob/protofeature/matrix/hylogen/src/Hylogen/Expr.hs).
 
 ```haskell
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE ConstraintKinds #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE DeriveFunctor #-}
+
 -- | Binary operator.
 -- Most generally typed.
 op2 :: forall a b c
