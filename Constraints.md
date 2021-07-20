@@ -16,7 +16,7 @@ Notes I want to hit
 ```
 "I'm tired of it. Fuck working, who wants to work?
 
-I want the money to work for me. I'm tired of working for the money."
+I want the money to work for me. I'm tired of working for the money." - Sanford Kelly 2009.
 ```
 
 !TODO
