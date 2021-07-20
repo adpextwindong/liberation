@@ -133,3 +133,30 @@ data GLSLType = GLSLFloat
               | GLSLTexture
               deriving (Eq, Ord)
 ```
+
+### Attempts at Natural Deduction AST that started all of this type level monkey buisness
+
+The core idea was to use DataKinds, type families and type operators to mark types as "Cursed" and "Uncursed" or "Burdened" and "Unburdened".
+
+Example from [here](https://github.com/adpextwindong/NDNotes/blob/main/app/Main.hs).
+
+
+```haskell
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+
+data PTaintedness -- Burden of Proof
+    = Burdened
+    | Unburdened
+    deriving (Eq, Show, Typeable)
+
+type family CombinePTaintedness (a :: PTaintedness) (b :: PTaintedness) :: PTaintedness where
+    'Burdened `CombinePTaintedness` _ = 'Burdened
+    _ `CombinePTaintedness` 'Burdened = 'Burdened
+    _ `CombinePTaintedness` _ = 'Unburdened
+```
+
+TODO see if literate haskell can be used to make sure these type check
+
+Now this approach was an attempt to represent Gentzen's Natural Deduction Logic mostly in the type level. I couldn't get ImplyIntro to type check (yet).
