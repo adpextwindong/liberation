@@ -10,3 +10,5 @@ TODO note any good examples in [Fun with phantom types by R.Hinze 2003](/Papers/
 TODO [SO Example of Units](https://stackoverflow.com/a/28250226)
 
 According to [R.Hinze](/Papers/FunWithPhantomTypes.pdf#page=8), the term [Phantom Type](/Papers/leijen.pdf#page=8) was coined by Leijen and Meijer "to denote parameterized types that do not use their type argument." Leijen and Meijer also use this technique in another paper w/ SPJ and Sigbjorn Finne "Calling Hell From Heaven and Heaven From Hell". [Section 5.1](/Papers/CallingHellFromHeavenAndHeavenFromHell.pdf#page=8) is where the usage of Phantom Types pops up.
+
+A talk on this topic [Harold Carr - How to use Phantom Types and Existential Types in Production](https://www.youtube.com/watch?v=EvtSyMRYXjE) provides a [worked example of this](https://github.com/haroldcarr/using-phantoms-and-existentials/blob/master/src/GaugeUse.hs#L327).
