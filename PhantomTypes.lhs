@@ -7,3 +7,4 @@ TODO 5.1 example
 TODO GADT example?
 
 TODO note any good examples in [Fun with phantom types by R.Hinze 2003](/Papers/FunWithPhantomTypes.pdf)
+TODO [SO Example of Units](https://stackoverflow.com/a/28250226)
