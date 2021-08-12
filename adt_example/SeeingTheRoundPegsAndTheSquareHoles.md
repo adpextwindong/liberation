@@ -43,7 +43,7 @@ Representing this in a concise manner using C requires the "Tagged Union" constr
 
 Here's the C equivilant:
 
-Note: For the sake of being a one line expression (to mirror the Haskell expression) this C example uses [Compound Literal Syntax](https://en.wikipedia.org/wiki/C_syntax#Compound_literals) avalible since C99.
+Note: For the sake of being a single statement (to mirror the Haskell expression) this C example uses [Compound Literal Syntax](https://en.wikipedia.org/wiki/C_syntax#Compound_literals) avalible since C99.
 
 ```C
 //BTree Union Tag
