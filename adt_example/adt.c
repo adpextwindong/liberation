@@ -1,31 +1,30 @@
-#ifndef ADT_H
-#define ADT_H
-
-enum TREE_TAG {
+//BTree Union Tag
+enum BTREE_TAG {
     NODE,
     LEAF
 };
 
-struct Tree {
-    enum TREE_TAG tag;
+//BTree DataType
+struct BTree {
+    enum BTREE_TAG tag;
     union {
         struct Node {
-            struct Tree * left;
-            struct Tree * right;
+            struct BTree * left;
+            struct BTree * right;
         } node;
         int value;
     };
-} Tree;
+} BTree;
 
 int main(void){
-    struct Tree tx = ((struct Tree) {
+    
+    //A BTree declaration equivlant to tx in the Haskell example
+    struct BTree tx = ((struct BTree) {
         .tag = NODE, .node = ((struct Node){
-            &(struct Tree){ .tag = LEAF, .value = 5},
-            &(struct Tree){ .tag = LEAF, .value = 6}
+            &(struct BTree){ .tag = LEAF, .value = 5},
+            &(struct BTree){ .tag = LEAF, .value = 6}
         })
     });
 
     return 0;
 }
-
-#endif
