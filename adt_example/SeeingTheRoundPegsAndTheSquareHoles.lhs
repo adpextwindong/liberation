@@ -33,10 +33,10 @@ NOTE: [A LITERATE HASKELL VERSION OF THIS ARTICLE EXISTS](SeeingTheRoundPegsAndT
 data BTree a = Leaf a
              | Node (BTree a) (BTree a)
 
-tx =  (Node
-        (Leaf 5)
-        (Leaf 6))
-
+tx :: BTree Int
+tx = (Node
+       (Leaf 5)
+       (Leaf 6))
 \end{code}
 
 Representing this in a concise manner using C requires the "Tagged Union" construct. In other languages and more rigorous contexts we call it a [Sum type](https://en.wikipedia.org/wiki/Tagged_union). C Unions combined with a "tag" enum denoting which variant it is can act as a Sum Type. C Structs on the other hand act as [Product types](https://en.wikipedia.org/wiki/Product_type). In our Haskell example Node is one as it has multiple fields to it. Sum and Product types together form [Algebraic Data Types](https://en.wikipedia.org/wiki/Algebraic_data_type).
