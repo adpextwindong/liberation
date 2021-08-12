@@ -17,8 +17,8 @@ struct BTree {
 } BTree;
 
 int main(void){
-    
-    //A BTree declaration equivlant to tx in the Haskell example
+
+    //A BTree assignment equal to a fully evaluated tx in the Haskell example
     struct BTree tx = ((struct BTree) {
         .tag = NODE, .node = ((struct Node){
             &(struct BTree){ .tag = LEAF, .value = 5},

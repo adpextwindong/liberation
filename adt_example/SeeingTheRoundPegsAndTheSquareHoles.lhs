@@ -51,7 +51,7 @@ Note: For the sake of being a one line expression (to mirror the Haskell express
 
 You might think well jeeze thats a simple data constructor, whats the big deal?
 
-Notice that TREE_TAG and the union within struct TREE are seperate statements. Idealy these are organized right next to eachother and kept in sync. Secondly anytime you want to inspect a tree you have to manually handle the type tag. The language doesn't hold your hand for this. This bit in particular is what I call juggling at the value level. Ideally a language would handle this for you.
+Notice that BTREE_TAG and the union within struct BTREE are seperate statements. Idealy these are organized right next to eachother and kept in sync. Secondly anytime you want to inspect a tree you have to manually handle the type tag. The language doesn't hold your hand for this. This bit in particular is what I call juggling at the value level. Ideally a language would handle this for you.
 
 What if we want to represent more complicated expressions? Such as:
 
@@ -109,7 +109,7 @@ data UniqOpts = UniqOpts {                                  -- Corresponding GNU
 
 SeperationHandling in the AllRepeated data constructor show cases a missing pain point in Haskell that hand written C would deal with. If I were to add more seperation handling modes to the SeperationHandling type I do it right there. Then for any functions handling SeperationHandling directly the non-exhaustive pattern match warning can indicate if I haven't handled it. Also notice how its all nested inside the UniqOpts datatype.
 
-Other pitfalls in the C version to note is that to have a Tree type be generic in its value type (without preprocessor schenanigans) value must be of type void *. Doing this however diverges it meaning from the Haskell equivlant seen here. Any leaf could contain an arbitrary void * to a heterogenous type. Any interface you build would have to maintain this invariance if you want a BTree of a specific value type.
+Other pitfalls in the C version to note is that to have a BTree type be generic in its value type (without preprocessor schenanigans) value must be of type void *. Doing this however diverges it meaning from the Haskell equivlant seen here. Any leaf could contain an arbitrary void * to a heterogenous type. Any interface you build would have to maintain this invariance if you want a BTree of a specific value type.
 
 Going beyond this example, an excerise left to the reader is to look at abstract syntax trees in compilers and embedded domain specific languages. There's a lot you can express and manipulate easily when you aren't caught up in language cobbwebs. Alternatively how would you do this in C++/Java?
 
