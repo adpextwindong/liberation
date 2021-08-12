@@ -1,6 +1,5 @@
 #ifndef ADT_H
 #define ADT_H
-#include <stdio.h>
 
 enum TREE_TAG {
     NODE,
@@ -25,9 +24,6 @@ int main(void){
             &(struct Tree){ .tag = LEAF, .value = 6}
         })
     });
-
-    printf("%d\n", tx.node.left->value);
-    printf("%d\n", tx.node.right->value);
 
     return 0;
 }
