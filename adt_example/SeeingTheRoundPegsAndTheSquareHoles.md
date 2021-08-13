@@ -43,7 +43,7 @@ Representing this in a concise manner using C requires the "Tagged Union" constr
 
 Here's the C equivilant:
 
-Note: For the sake of being a single statement (to mirror the Haskell expression) this C example uses [Compound Literal Syntax](https://en.wikipedia.org/wiki/C_syntax#Compound_literals) avalible since C99.
+Note: For the sake of being a single statement (to mirror the Haskell expression) this C example uses [Compound Literal Syntax](https://en.wikipedia.org/wiki/C_syntax#Compound_literals) avalible since C99. Compiled with "gcc -std=c99 adt.c -o main_adt.exe"
 
 ```C
 //BTree Union Tag
@@ -149,3 +149,64 @@ Always take the opportunity to look at new language concepts and stick it in the
 [![The Woodwright's Shop Intro (2017)](https://img.youtube.com/vi/I7IXq-qmt70/0.jpg)](https://www.youtube.com/watch?v=I7IXq-qmt70)
 
 Note: If you're interested in ADT's in C99 theres a recent library [Datatype99](https://github.com/Hirrolot/datatype99).
+
+## BONUS
+
+The original C example was compiled with:
+
+```
+gcc -std=c99 adt.c -o main_adt.exe
+```
+
+What happens if we return the BTree, as declared, from a function with optimization passes turned on? Try compiling the following code with -O turned on.
+
+```C
+#include <stdio.h>
+
+//BTree Union Tag
+enum BTREE_TAG {
+    NODE,
+    LEAF
+};
+
+//BTree DataType
+struct BTree {
+    enum BTREE_TAG tag;
+    union {
+        struct Node {
+            struct BTree * left;
+            struct BTree * right;
+        } node;
+        int value;
+    };
+} BTree;
+
+struct BTree foo(void){
+    struct BTree ret = ((struct BTree) {
+        .tag = NODE, .node = ((struct Node){
+            &(struct BTree){ .tag = LEAF, .value = 5},
+            &(struct BTree){ .tag = LEAF, .value = 6}
+        })
+    });
+
+    return ret;
+}
+int main(void){
+    struct BTree tx = foo();
+
+    printf("%d\n", tx.node.left->value);
+
+    return 0;
+}
+```
+
+Can you explain whats happening?
+
+Hint: Why are the left and right nodes pointers? How do we get around this in the compound literal expression and why is that a potential pitfall?
+
+```C
+struct Node {
+    struct BTree * left;
+    struct BTree * right;
+} node;
+```
