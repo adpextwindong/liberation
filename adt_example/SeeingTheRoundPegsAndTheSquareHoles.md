@@ -138,7 +138,7 @@ SeperationHandling in the AllRepeated data constructor show cases a missing pain
 
 Other pitfalls in the C version to note is that to have a BTree type be generic in its value type (without preprocessor schenanigans) value must be of type void *. Doing this however diverges it meaning from the Haskell equivlant seen here. Any leaf could contain an arbitrary void * to a heterogenous type. Any interface you build would have to maintain this invariance if you want a BTree of a specific value type.
 
-Going beyond this example, an excerise left to the reader is to look at abstract syntax trees in compilers and embedded domain specific languages. There's a lot you can express and manipulate easily when you aren't caught up in language cobbwebs. Alternatively how would you do this in C++/Java?
+Going beyond this example, an excerise left to the reader is to look at abstract syntax trees in compilers and embedded domain specific languages. There's a lot you can express and manipulate easily when you aren't caught up in language cobbwebs. Alternatively how would you do this in C++/Java? (For example [Viskell, a typed Haskell like language written in Java](https://github.com/viskell/viskell/tree/master/Code/src/main/java/nl/utwente/viskell/haskell/expr))
 
 ## Conclusion
 
