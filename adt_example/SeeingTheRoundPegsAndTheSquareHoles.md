@@ -133,6 +133,9 @@ data UniqOpts = UniqOpts {                                  -- Corresponding GNU
                     nullTerminated   :: Bool                -- -z --zero-terminated
                 }
 ```
+TODO REWRITE THIS SECTION TO DISAMBIGUATE
+TODO spellcheck
+TODO reorder the UniqOpts presentation in the example
 
 SeperationHandling in the AllRepeated data constructor show cases a missing pain point in Haskell that hand written C would deal with. If I were to add more seperation handling modes to the SeperationHandling type I do it right there. Then for any functions handling SeperationHandling directly the non-exhaustive pattern match warning can indicate if I haven't handled it. Also notice how its all nested inside the UniqOpts datatype.
 
