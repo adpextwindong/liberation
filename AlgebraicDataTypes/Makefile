@@ -6,4 +6,4 @@ clean:
 	rm -f *.o a.exe
 
 all:
-	$(CC) $(FLAGS) uniq_opts.c
+	$(CC) $(FLAGS) expr.c
