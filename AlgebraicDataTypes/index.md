@@ -25,7 +25,11 @@ This view is consistent with "Chapter 16. Structures, Unions, and Enumerations" 
 King's section titled "Using Unions to Build Mixed Data Structures" pg399 describes further usage of unions.
 
 ```
-Unions have another important application: creating data structures that contain a mixture of data of different types. Let's say that we need an array whose elements are am ixture of `int` and `double` values. Since the elemtns of an array must be of the same type, it seems impossible to create such an array. Using unions though, it's relatively easy. First, we define a union type whose members represent the different kinds of data to be stored in the array:
+Unions have another important application: creating data structures that contain a mixture of data of different types.
+Let's say that we need an array whose elements are am ixture of `int` and `double` values.
+Since the elemtns of an array must be of the same type, it seems impossible to create such an array.
+Using unions though, it's relatively easy.
+First, we define a union type whose members represent the different kinds of data to be stored in the array:
 
 typedef union {
     int i;
